@@ -29,5 +29,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => AuthenticationService());
-  locator.registerLazySingleton(() => ApiService());
+  locator.registerLazySingleton(() => ApiService.getInstance());
 }

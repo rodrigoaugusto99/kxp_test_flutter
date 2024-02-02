@@ -27,7 +27,7 @@ import 'package:my_first_app/ui/views/advices/advices_view.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthenticationService),
-    LazySingleton(classType: ApiService),
+    LazySingleton(classType: ApiService, resolveUsing: ApiService.getInstance),
 // @stacked-service
   ],
   bottomsheets: [

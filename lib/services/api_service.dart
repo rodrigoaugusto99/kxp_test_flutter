@@ -8,6 +8,8 @@ class ApiService extends DioHttpService {
   final IHttpService client;
 
   ApiService(this.client);
+
+  static ApiService getInstance() => ApiService(DioHttpService());
   Future<AdviceModel> getRandommVerse() async {
     final response = await client.get('https://api.adviceslip.com/advice');
 
