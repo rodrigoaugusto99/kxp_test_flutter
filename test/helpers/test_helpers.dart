@@ -4,6 +4,7 @@ import 'package:my_first_app/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:my_first_app/services/authentication_service.dart';
 import 'package:my_first_app/services/api_service.dart';
+import 'package:my_first_app/services/api_converter_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -14,6 +15,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AuthenticationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ApiService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ApiConverterService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -22,6 +24,7 @@ void registerServices() {
   getAndRegisterDialogService();
   getAndRegisterAuthenticationService();
   getAndRegisterApiService();
+  getAndRegisterApiConverterService();
 // @stacked-mock-register
 }
 
@@ -86,6 +89,13 @@ MockApiService getAndRegisterApiService() {
   _removeRegistrationIfExists<ApiService>();
   final service = MockApiService();
   locator.registerSingleton<ApiService>(service);
+  return service;
+}
+
+MockApiConverterService getAndRegisterApiConverterService() {
+  _removeRegistrationIfExists<ApiConverterService>();
+  final service = MockApiConverterService();
+  locator.registerSingleton<ApiConverterService>(service);
   return service;
 }
 // @stacked-mock-create

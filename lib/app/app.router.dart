@@ -5,17 +5,21 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i11;
 import 'package:flutter/material.dart';
 import 'package:my_first_app/ui/views/advices/advices_view.dart' as _i7;
+import 'package:my_first_app/ui/views/conversor/conversor_view.dart' as _i10;
 import 'package:my_first_app/ui/views/counter/counter_view.dart' as _i4;
 import 'package:my_first_app/ui/views/home/home_view.dart' as _i2;
 import 'package:my_first_app/ui/views/login/login_view.dart' as _i5;
+import 'package:my_first_app/ui/views/so_much_buttons/so_much_buttons_view.dart'
+    as _i8;
 import 'package:my_first_app/ui/views/startup/startup_view.dart' as _i3;
 import 'package:my_first_app/ui/views/text_reverse/text_reverse_view.dart'
     as _i6;
+import 'package:my_first_app/ui/views/todo_list/todo_list_view.dart' as _i9;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i12;
 
 class Routes {
   static const homeView = '/home-view';
@@ -30,6 +34,12 @@ class Routes {
 
   static const advicesView = '/advices-view';
 
+  static const soMuchButtonsView = '/so-much-buttons-view';
+
+  static const todoListView = '/todo-list-view';
+
+  static const conversorView = '/conversor-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -37,6 +47,9 @@ class Routes {
     loginView,
     textReverseView,
     advicesView,
+    soMuchButtonsView,
+    todoListView,
+    conversorView,
   };
 }
 
@@ -66,44 +79,75 @@ class StackedRouter extends _i1.RouterBase {
       Routes.advicesView,
       page: _i7.AdvicesView,
     ),
+    _i1.RouteDef(
+      Routes.soMuchButtonsView,
+      page: _i8.SoMuchButtonsView,
+    ),
+    _i1.RouteDef(
+      Routes.todoListView,
+      page: _i9.TodoListView,
+    ),
+    _i1.RouteDef(
+      Routes.conversorView,
+      page: _i10.ConversorView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      final args = data.getArgs<HomeViewArguments>(nullOk: false);
-      return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) =>
-            _i2.HomeView(key: args.key, startingIndex: args.startingIndex),
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.CounterView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.CounterView(),
         settings: data,
       );
     },
     _i5.LoginView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.LoginView(),
         settings: data,
       );
     },
     _i6.TextReverseView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.TextReverseView(),
         settings: data,
       );
     },
     _i7.AdvicesView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.AdvicesView(),
+        settings: data,
+      );
+    },
+    _i8.SoMuchButtonsView: (data) {
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i8.SoMuchButtonsView(),
+        settings: data,
+      );
+    },
+    _i9.TodoListView: (data) {
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i9.TodoListView(),
+        settings: data,
+      );
+    },
+    _i10.ConversorView: (data) {
+      final args = data.getArgs<ConversorViewArguments>(
+        orElse: () => const ConversorViewArguments(),
+      );
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => _i10.ConversorView(key: args.key),
         settings: data,
       );
     },
@@ -116,45 +160,37 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-class HomeViewArguments {
-  const HomeViewArguments({
-    this.key,
-    required this.startingIndex,
-  });
+class ConversorViewArguments {
+  const ConversorViewArguments({this.key});
 
-  final _i8.Key? key;
-
-  final int startingIndex;
+  final _i11.Key? key;
 
   @override
   String toString() {
-    return '{"key": "$key", "startingIndex": "$startingIndex"}';
+    return '{"key": "$key"}';
   }
 
   @override
-  bool operator ==(covariant HomeViewArguments other) {
+  bool operator ==(covariant ConversorViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key && other.startingIndex == startingIndex;
+    return other.key == key;
   }
 
   @override
   int get hashCode {
-    return key.hashCode ^ startingIndex.hashCode;
+    return key.hashCode;
   }
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
-  Future<dynamic> navigateToHomeView({
-    _i8.Key? key,
-    required int startingIndex,
+extension NavigatorStateExtension on _i12.NavigationService {
+  Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return navigateTo<dynamic>(Routes.homeView,
-        arguments: HomeViewArguments(key: key, startingIndex: startingIndex),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -231,17 +267,58 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithHomeView({
-    _i8.Key? key,
-    required int startingIndex,
+  Future<dynamic> navigateToSoMuchButtonsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.soMuchButtonsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToTodoListView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.todoListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToConversorView({
+    _i11.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
+    return navigateTo<dynamic>(Routes.conversorView,
+        arguments: ConversorViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithHomeView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
     return replaceWith<dynamic>(Routes.homeView,
-        arguments: HomeViewArguments(key: key, startingIndex: startingIndex),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -312,6 +389,50 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.advicesView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSoMuchButtonsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.soMuchButtonsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithTodoListView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.todoListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithConversorView({
+    _i11.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.conversorView,
+        arguments: ConversorViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

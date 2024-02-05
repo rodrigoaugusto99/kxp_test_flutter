@@ -10,6 +10,10 @@ import 'package:my_first_app/services/authentication_service.dart';
 import 'package:my_first_app/ui/views/text_reverse/text_reverse_view.dart';
 import 'package:my_first_app/services/api_service.dart';
 import 'package:my_first_app/ui/views/advices/advices_view.dart';
+import 'package:my_first_app/ui/views/so_much_buttons/so_much_buttons_view.dart';
+import 'package:my_first_app/ui/views/todo_list/todo_list_view.dart';
+import 'package:my_first_app/ui/views/conversor/conversor_view.dart';
+import 'package:my_first_app/services/api_converter_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -20,6 +24,9 @@ import 'package:my_first_app/ui/views/advices/advices_view.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: TextReverseView),
     MaterialRoute(page: AdvicesView),
+    MaterialRoute(page: SoMuchButtonsView),
+    MaterialRoute(page: TodoListView),
+    MaterialRoute(page: ConversorView),
 // @stacked-route
   ],
   dependencies: [
@@ -28,6 +35,7 @@ import 'package:my_first_app/ui/views/advices/advices_view.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: ApiService, resolveUsing: ApiService.getInstance),
+    LazySingleton(classType: ApiConverterService),
 // @stacked-service
   ],
   bottomsheets: [

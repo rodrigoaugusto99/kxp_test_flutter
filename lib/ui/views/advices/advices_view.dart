@@ -70,9 +70,9 @@ class AdvicesView extends StackedView<AdvicesViewModel> with $AdvicesView {
 
 //horario, to trab agora, eu posso ate marcar la no onboaard? e se por exemplo, eu combinei que trabalho de tarde, mas e se por um acaso eu puder puder trabalhar de manha?
 //eu cumpro meu horario de manha, mas alguem me chamou de tarde que seria o meu horario padrao
-//como seria isso? seria aquele joguinho do habbo 
+//como seria isso? seria aquele joguinho do habbo
 
-//e sobre como eles usam o stacked, se fazem pelo generate ou nao, pq pelo q e u vi parece q eh algo novo, a maioria dos videos q vi o pessoal usando eles escreviam tudo na mao respeitando 
+//e sobre como eles usam o stacked, se fazem pelo generate ou nao, pq pelo q e u vi parece q eh algo novo, a maioria dos videos q vi o pessoal usando eles escreviam tudo na mao respeitando
 // a arquitetura.
 
 //tambem gostaria de um bom exemplo, um projeto pra eu dar uma olhada em como  eh o padrao de vcs, sabe os services, etc, os consumos de api, etc
