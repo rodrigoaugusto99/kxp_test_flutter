@@ -31,22 +31,4 @@ class SoMuchButtonsViewModel extends BaseViewModel {
       description: ksHomeBottomSheetDescription,
     );
   }
-
-  //   enum BottomSheetType {
-//   notice,
-//   selectDaysOfWeek,
-// }
-
-//   void setupBottomSheetUi() {
-//   final bottomsheetService = locator<BottomSheetService>();
-
-//   final Map<BottomSheetType, SheetBuilder> builders = {
-//     BottomSheetType.notice: (context, request, completer) =>
-//         NoticeSheet(request: request, completer: completer),
-//     BottomSheetType.selectDaysOfWeek: (context, request, completer) =>
-//         SelectDaysOfWeekSheet(request: request, completer: completer),
-//   };
-
-//   bottomsheetService.setCustomSheetBuilders(builders);
-// }
 }

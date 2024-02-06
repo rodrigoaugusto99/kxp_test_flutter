@@ -1,5 +1,4 @@
-import 'dart:developer';
-import 'package:flutter/material.dart';
+import 'package:my_first_app/app/app.bottomsheets.dart';
 import 'package:my_first_app/app/app.dialogs.dart';
 import 'package:my_first_app/app/app.locator.dart';
 import 'package:my_first_app/app/models/moeda_model.dart';
@@ -11,6 +10,7 @@ class ConversorViewModel extends BaseViewModel {
   final _apiConverter = locator<ApiConverterService>();
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _navigationService = locator<NavigationService>();
 
   List<MoedaModel> _moedas = [];
   MoedaModel _moedaIn = MoedaModel.init();
@@ -70,29 +70,16 @@ class ConversorViewModel extends BaseViewModel {
     );
   }
 
-  Future<MoedaModel?> selectMoeda(MoedaModel moedaModel, BuildContext context) {
-    return showModalBottomSheet<MoedaModel>(
-      context: context,
-      builder: (context) {
-        return BottomSheet(
-          onClosing: () {},
-          builder: (context) {
-            return ListView.builder(
-              itemCount: moedas.length,
-              itemBuilder: (context, index) {
-                final innerMoeda = moedas[index];
-                return ListTile(
-                  title: Text(innerMoeda.name),
-                  selected: innerMoeda == moedaModel,
-                  onTap: () {
-                    Navigator.of(context).pop(innerMoeda);
-                  },
-                );
-              },
-            );
-          },
-        );
-      },
+  Future showMoedasBottomSheet(MoedaModel moedaModel) async {
+    var response = await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.moedas,
+      title: 'Moedas',
+      description: 'moedas',
+      data: _moedas,
     );
+    return response!.data;
   }
 }
+
+//bottomSheet com children pasando o listview
+//futureViewModel.

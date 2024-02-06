@@ -34,8 +34,8 @@ class ConversorView extends StackedView<ConversorViewModel> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    final moeda =
-                        await viewModel.selectMoeda(viewModel.moedaIn, context);
+                    final moeda = await viewModel
+                        .showMoedasBottomSheet(viewModel.moedaIn);
 
                     viewModel.selecionarMoedaIn(moeda);
                   },
@@ -50,8 +50,8 @@ class ConversorView extends StackedView<ConversorViewModel> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    final moeda = await viewModel.selectMoeda(
-                        viewModel.moedaOut, context);
+                    final moeda = await viewModel
+                        .showMoedasBottomSheet(viewModel.moedaOut);
 
                     viewModel.selecionarMoedaOut(moeda);
                   },
@@ -61,9 +61,12 @@ class ConversorView extends StackedView<ConversorViewModel> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => viewModel.converter(input),
-              child: Text('Resultado: ${viewModel.result}'),
-            )
+                onPressed: () => viewModel.converter(input),
+                child: const Text('CONVERTER')),
+            const SizedBox(
+              width: 3,
+            ),
+            Text('Resultado: ${viewModel.result}')
           ],
         ),
       ),

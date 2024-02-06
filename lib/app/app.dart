@@ -14,6 +14,8 @@ import 'package:my_first_app/ui/views/so_much_buttons/so_much_buttons_view.dart'
 import 'package:my_first_app/ui/views/todo_list/todo_list_view.dart';
 import 'package:my_first_app/ui/views/conversor/conversor_view.dart';
 import 'package:my_first_app/services/api_converter_service.dart';
+
+import 'package:my_first_app/ui/bottom_sheets/moedas/moedas_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -40,7 +42,8 @@ import 'package:my_first_app/services/api_converter_service.dart';
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
-    // @stacked-bottom-sheet
+    StackedBottomsheet(classType: MoedasSheet),
+// @stacked-bottom-sheet
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
