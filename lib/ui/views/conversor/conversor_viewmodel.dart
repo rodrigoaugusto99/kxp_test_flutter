@@ -6,28 +6,32 @@ import 'package:my_first_app/services/api_converter_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class ConversorViewModel extends BaseViewModel {
+class ConversorViewModel extends FutureViewModel<List<MoedaModel>> {
+  @override
+  Future<List<MoedaModel>> futureToRun() async {
+    final moedas = await _apiConverter.getMoedas();
+    return moedas;
+  }
+
   final _apiConverter = locator<ApiConverterService>();
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
-  final _navigationService = locator<NavigationService>();
 
-  List<MoedaModel> _moedas = [];
+  // List<MoedaModel> _moedas = [];
   MoedaModel _moedaIn = MoedaModel.init();
   MoedaModel _moedaOut = MoedaModel.init();
   String _result = '0';
 
-  List<MoedaModel> get moedas => _moedas;
+  //List<MoedaModel> get moedas => _moedas;
   MoedaModel get moedaIn => _moedaIn;
   MoedaModel get moedaOut => _moedaOut;
   String get result => _result;
 
-  Future getMoedas() async {
-    _moedas = await _apiConverter.getMoedas();
-  }
-
   Future converter(String valorRaw) async {
     try {
+      setBusyForObject(result, true);
+      //setBusy(true); fica indicator na tela tdoa
+      await Future.delayed(const Duration(seconds: 1));
       final cotacao = await _apiConverter.cotacao(_moedaIn, _moedaOut);
 
       final valor = double.parse(valorRaw);
@@ -38,6 +42,9 @@ class ConversorViewModel extends BaseViewModel {
       // Exceção capturada (erro 404)
       //log(s.toString());
       showErrorDialog(e.toString());
+    } finally {
+      setBusyForObject(result, false);
+      //setBusy(false);
     }
   }
 
@@ -70,16 +77,13 @@ class ConversorViewModel extends BaseViewModel {
     );
   }
 
-  Future showMoedasBottomSheet(MoedaModel moedaModel) async {
+  Future showMoedas2BottomSheet(MoedaModel moedaModel) async {
+    setBusyForObject(moedaModel, true);
     var response = await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.moedas,
-      title: 'Moedas',
-      description: 'moedas',
-      data: _moedas,
+      variant: BottomSheetType.moedas2,
+      data: data,
     );
+    setBusyForObject(moedaModel, false);
     return response!.data;
   }
 }
-
-//bottomSheet com children pasando o listview
-//futureViewModel.

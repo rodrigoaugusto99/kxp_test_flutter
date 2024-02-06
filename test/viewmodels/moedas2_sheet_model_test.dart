@@ -4,7 +4,7 @@ import 'package:my_first_app/app/app.locator.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {
-  group('MoedasSheetModel Tests -', () {
+  group('Moedas2SheetModel Tests -', () {
     setUp(() => registerServices());
     tearDown(() => locator.reset());
   });

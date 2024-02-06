@@ -7,7 +7,10 @@ import 'package:stacked/stacked_annotations.dart';
 import 'text_reverse_viewmodel.dart';
 
 @FormView(fields: [
-  FormTextField(name: 'reverseInput'),
+  FormTextField(
+    name: 'reverseInput',
+    validator: TextReverseValidators.validateReverseText,
+  ),
 ])
 class TextReverseView extends StackedView<TextReverseViewModel>
     with $TextReverseView {

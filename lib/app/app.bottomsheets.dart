@@ -7,12 +7,12 @@
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
-import '../ui/bottom_sheets/moedas/moedas_sheet.dart';
+import '../ui/bottom_sheets/moedas2/moedas2_sheet.dart';
 import '../ui/bottom_sheets/notice/notice_sheet.dart';
 
 enum BottomSheetType {
   notice,
-  moedas,
+  moedas2,
 }
 
 void setupBottomSheetUi() {
@@ -21,8 +21,8 @@ void setupBottomSheetUi() {
   final Map<BottomSheetType, SheetBuilder> builders = {
     BottomSheetType.notice: (context, request, completer) =>
         NoticeSheet(request: request, completer: completer),
-    BottomSheetType.moedas: (context, request, completer) =>
-        MoedasSheet(request: request, completer: completer),
+    BottomSheetType.moedas2: (context, request, completer) =>
+        Moedas2Sheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

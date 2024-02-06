@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/app/models/moeda_model.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'moedas_sheet_model.dart';
+import 'moedas2_sheet_model.dart';
 
-class MoedasSheet extends StatefulWidget {
+class Moedas2Sheet extends StackedView<Moedas2SheetModel> {
   final Function(SheetResponse response)? completer;
   final SheetRequest request;
-
-  const MoedasSheet({
+  const Moedas2Sheet({
     Key? key,
     required this.completer,
     required this.request,
   }) : super(key: key);
 
   @override
-  _MoedasSheetState createState() => _MoedasSheetState();
-}
-
-class _MoedasSheetState extends State<MoedasSheet> {
-  late MoedaModel _selectedMoeda;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget builder(
+    BuildContext context,
+    Moedas2SheetModel viewModel,
+    Widget? child,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: const BoxDecoration(
@@ -33,21 +29,21 @@ class _MoedasSheetState extends State<MoedasSheet> {
         ),
       ),
       child: ListView.builder(
-        itemCount: widget.request.data.length,
+        itemCount: request.data.length,
         itemBuilder: (context, index) {
-          final innerMoeda = widget.request.data[index];
+          final innerMoeda = request.data[index];
           return ListTile(
             title: Text(innerMoeda.name),
             onTap: () {
-              _selectedMoeda = innerMoeda;
-              widget.completer!(SheetResponse(data: _selectedMoeda));
+              completer!(SheetResponse(data: innerMoeda));
             },
           );
         },
       ),
     );
   }
-}
 
-@override
-MoedasSheetModel viewModelBuilder(BuildContext context) => MoedasSheetModel();
+  @override
+  Moedas2SheetModel viewModelBuilder(BuildContext context) =>
+      Moedas2SheetModel();
+}
