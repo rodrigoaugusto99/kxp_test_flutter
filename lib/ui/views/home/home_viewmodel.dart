@@ -28,4 +28,8 @@ class HomeViewModel extends BaseViewModel {
   void navigateToConversor() {
     _navigationService.navigateToConversorView();
   }
+
+  void navigateToStreamTest() {
+    _navigationService.navigateToTestStreamView();
+  }
 }

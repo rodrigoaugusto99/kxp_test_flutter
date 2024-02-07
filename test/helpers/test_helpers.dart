@@ -5,6 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:my_first_app/services/authentication_service.dart';
 import 'package:my_first_app/services/api_service.dart';
 import 'package:my_first_app/services/api_converter_service.dart';
+import 'package:my_first_app/services/counter_by_seconds_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -16,6 +17,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<AuthenticationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ApiService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ApiConverterService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<CounterBySecondsService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -25,6 +27,7 @@ void registerServices() {
   getAndRegisterAuthenticationService();
   getAndRegisterApiService();
   getAndRegisterApiConverterService();
+  getAndRegisterCounterBySecondsService();
 // @stacked-mock-register
 }
 
@@ -96,6 +99,13 @@ MockApiConverterService getAndRegisterApiConverterService() {
   _removeRegistrationIfExists<ApiConverterService>();
   final service = MockApiConverterService();
   locator.registerSingleton<ApiConverterService>(service);
+  return service;
+}
+
+MockCounterBySecondsService getAndRegisterCounterBySecondsService() {
+  _removeRegistrationIfExists<CounterBySecondsService>();
+  final service = MockCounterBySecondsService();
+  locator.registerSingleton<CounterBySecondsService>(service);
   return service;
 }
 // @stacked-mock-create

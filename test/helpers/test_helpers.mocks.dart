@@ -17,6 +17,7 @@ import 'package:my_first_app/app/models/moeda_model.dart' as _i14;
 import 'package:my_first_app/services/api_converter_service.dart' as _i13;
 import 'package:my_first_app/services/api_service.dart' as _i12;
 import 'package:my_first_app/services/authentication_service.dart' as _i11;
+import 'package:my_first_app/services/counter_by_seconds_service.dart' as _i15;
 import 'package:stacked_services/stacked_services.dart' as _i6;
 
 // ignore_for_file: type=lint
@@ -951,4 +952,20 @@ class MockApiConverterService extends _i1.Mock
         returnValue: 0.0,
         returnValueForMissingStub: 0.0,
       ) as double);
+}
+
+/// A class which mocks [CounterBySecondsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCounterBySecondsService extends _i1.Mock
+    implements _i15.CounterBySecondsService {
+  @override
+  _i9.Stream<int> epochUpdatesNumbers() => (super.noSuchMethod(
+        Invocation.method(
+          #epochUpdatesNumbers,
+          [],
+        ),
+        returnValue: _i9.Stream<int>.empty(),
+        returnValueForMissingStub: _i9.Stream<int>.empty(),
+      ) as _i9.Stream<int>);
 }

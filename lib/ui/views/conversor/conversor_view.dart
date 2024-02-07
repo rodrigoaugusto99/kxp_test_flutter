@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:stacked/stacked.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'conversor_viewmodel.dart';
 
 class ConversorView extends StackedView<ConversorViewModel> {
@@ -69,6 +69,12 @@ class ConversorView extends StackedView<ConversorViewModel> {
                       ],
                     ),
                     const SizedBox(height: 20),
+                    ElevatedButton(
+                        onPressed: () async {
+                          final x = await viewModel.showCongratulationsDialog();
+                          log(x.toString());
+                        },
+                        child: const Text('dialog test')),
                     ElevatedButton(
                         onPressed: () => viewModel.converter(input),
                         child: const Text('CONVERTER')),

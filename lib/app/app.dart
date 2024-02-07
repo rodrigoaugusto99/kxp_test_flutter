@@ -15,6 +15,9 @@ import 'package:my_first_app/ui/views/todo_list/todo_list_view.dart';
 import 'package:my_first_app/ui/views/conversor/conversor_view.dart';
 import 'package:my_first_app/services/api_converter_service.dart';
 import 'package:my_first_app/ui/bottom_sheets/moedas2/moedas2_sheet.dart';
+import 'package:my_first_app/services/counter_by_seconds_service.dart';
+import 'package:my_first_app/ui/views/test_stream/test_stream_view.dart';
+import 'package:my_first_app/ui/dialogs/confirmacao_conversao/confirmacao_conversao_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -28,6 +31,8 @@ import 'package:my_first_app/ui/bottom_sheets/moedas2/moedas2_sheet.dart';
     MaterialRoute(page: SoMuchButtonsView),
     MaterialRoute(page: TodoListView),
     MaterialRoute(page: ConversorView),
+    MaterialRoute(page: TestStreamView),
+
 // @stacked-route
   ],
   dependencies: [
@@ -37,6 +42,8 @@ import 'package:my_first_app/ui/bottom_sheets/moedas2/moedas2_sheet.dart';
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: ApiService, resolveUsing: ApiService.getInstance),
     LazySingleton(classType: ApiConverterService),
+    LazySingleton(classType: CounterBySecondsService),
+    LazySingleton(classType: SnackbarService),
 // @stacked-service
   ],
   bottomsheets: [
@@ -46,7 +53,8 @@ import 'package:my_first_app/ui/bottom_sheets/moedas2/moedas2_sheet.dart';
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
-    // @stacked-dialog
+    StackedDialog(classType: ConfirmacaoConversaoDialog),
+// @stacked-dialog
   ],
 )
 class App {}

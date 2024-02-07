@@ -42,6 +42,11 @@ class HomeView extends StackedView<HomeViewModel> {
               onPressed: () => viewModel.navigateToConversor(),
               child: const Text('conversor'),
             ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => viewModel.navigateToStreamTest(),
+              child: const Text('stream test'),
+            ),
           ],
         ),
       ),

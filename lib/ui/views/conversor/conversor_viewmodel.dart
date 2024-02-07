@@ -16,6 +16,7 @@ class ConversorViewModel extends FutureViewModel<List<MoedaModel>> {
   final _apiConverter = locator<ApiConverterService>();
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _snackBarService = locator<SnackbarService>();
 
   // List<MoedaModel> _moedas = [];
   MoedaModel _moedaIn = MoedaModel.init();
@@ -42,6 +43,10 @@ class ConversorViewModel extends FutureViewModel<List<MoedaModel>> {
       // Exceção capturada (erro 404)
       //log(s.toString());
       showErrorDialog(e.toString());
+      _snackBarService.showSnackbar(
+        message: e.toString(),
+        duration: const Duration(seconds: 2),
+      );
     } finally {
       setBusyForObject(result, false);
       //setBusy(false);
@@ -76,6 +81,37 @@ class ConversorViewModel extends FutureViewModel<List<MoedaModel>> {
       description: 'Erro',
     );
   }
+
+//dynamic p retornar qlqr coisa
+  Future<dynamic> showCongratulationsDialog() async {
+    var response = await _dialogService.showCustomDialog(
+      variant: DialogType.confirmacaoConversao,
+    );
+    //se tiver .data, quero que printe a data
+    //se nao, quero que printe o bool
+    if (response!.data != null) {
+      _snackBarService.showSnackbar(
+        message:
+            'data: ${response.data.toString()},\nbool: ${response.confirmed.toString()}',
+        duration: const Duration(seconds: 2),
+      );
+      return [response.data, response.confirmed];
+      //return response.data;
+    } else {
+      _snackBarService.showSnackbar(
+        message: response.confirmed.toString(),
+        duration: const Duration(seconds: 2),
+      );
+      return response.confirmed;
+    }
+  }
+
+  // Future<({dynamic x, dynamic y})> showCongratulationsDialog2() async {
+  //   var response = await _dialogService.showCustomDialog(
+  //     variant: DialogType.confirmacaoConversao,
+  //   );
+  //   return (x: response!.data, y: response.confirmed);
+  // }
 
   Future showMoedas2BottomSheet(MoedaModel moedaModel) async {
     setBusyForObject(moedaModel, true);
